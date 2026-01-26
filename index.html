@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- SEO -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agile Kanban Task Management Board | oKanban</title>
+    <meta name="description" content="oKanban is a modern Agile Kanban task management board with CRUD, drag and drop, dynamic statuses and localStorage persistence." />
+    <meta name="keywords" content="Kanban, Agile, Task Management, Scrum Board, Project Management Tool" />
+    <meta name="author" content="CyberBitByte" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .task {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+    <!-- Organization Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "oKanban - Agile Kanban Board",
+  "url": "https://www.cyberbitbyte.com/okanban",
+  "logo": "https://www.cyberbitbyte.com/images/cyber-bit-byte-logo.png",
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "Web",
+  "description": "oKanban is an agile task management board built with HTML5, CSS3, and JavaScript. It helps you organize and manage your projects or tasks efficiently using the Agile development process.",
+  "creator": {
+    "@type": "Organization",
+    "name": "Cyber Bit Byte",
+    "url": "https://www.cyberbitbyte.com"
+  },
+  "datePublished": "2026-01-26",
+  "softwareVersion": "1.0",
+  "keywords": "oKanban, Kanban Board, Agile Task Management, Project Management, Task Organizer, HTML5, CSS3, JavaScript",
+  "sameAs": [
+    "https://www.facebook.com/cyberbitbyte",
+    "https://www.youtube.com/@cyberbitbyte"
+  ]
+}
+</script>
+
+<!-- WebPage Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "oKanban - Agile Kanban Board",
+  "url": "https://www.cyberbitbyte.com/okanban",
+  "description": "oKanban is a modern Agile Kanban task management tool built with HTML5, CSS3, and JavaScript. Organize, track, and manage your tasks or projects efficiently with dynamic status columns and drag-and-drop functionality.",
+  "inLanguage": "en",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cyber Bit Byte",
+    "url": "https://www.cyberbitbyte.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.cyberbitbyte.com/images/cyber-bit-byte-logo.png",
+      "caption": "Cyber Bit Byte Logo"
+    }
+  },
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://www.cyberbitbyte.com/images/okanban-screenshot.png",
+    "caption": "Screenshot of oKanban Agile Task Management Board"
+  }
+}
+</script>
+
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.cyberbitbyte.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://www.cyberbitbyte.com/tools"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "oKanban - Agile Kanban Board",
+      "item": "https://www.cyberbitbyte.com/okanban"
+    }
+  ]
+}
+</script>
+
+<!-- FAQ Schema (Optional) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is oKanban?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "oKanban is a modern Agile Kanban task management board built using HTML5, CSS3, and JavaScript. It allows you to organize, track, and manage tasks efficiently."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I change task status in oKanban?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can change a task's status by using the status dropdown on each task card. The board updates automatically and saves your changes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I organize tasks by project?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, each task can have a project name tag, allowing you to categorize and filter tasks by projects on the board."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data saved?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, all tasks and statuses are saved in your browser's localStorage, so your board persists across sessions."
+      }
+    }
+  ]
+}
+</script>
+<!-- website schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "https://www.cyberbitbyte.com/",
+            "logo": "https://www.cyberbitbyte.com/images/cyber-bit-byte-logo-hz.png"
+        }
+        </script>
+
+        <!-- Organization Schema Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                "@type": "Organization",
+                "@id": "https://www.cyberbitbyte.com/#organization",
+                "name": "Cyber Bit Byte",
+                "url": "https://www.cyberbitbyte.com",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/cyber-bit-byte-logo.png",
+                    "caption": "Cyber Bit Byte Logo"
+                },
+                "image": [
+                    {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/cyber-bit-byte-logo-hz.png",
+                    "caption": "Cyber Bit Byte Horizontal Logo"
+                    },
+                    {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/cyber-bit-byte-icon.png",
+                    "caption": "Cyber Bit Byte Icon"
+                    },
+                    {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/favicon.ico",
+                    "caption": "Cyber Bit Byte Favicon ICO"
+                    },
+                    {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/favicon-32x32.png",
+                    "caption": "Cyber Bit Byte Favicon 32x32"
+                    },
+                    {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/favicon-16x16.png",
+                    "caption": "Cyber Bit Byte Favicon 16x16"
+                    },
+                    {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/apple-touch-icon.png",
+                    "caption": "Apple Touch Icon"
+                    },
+                    {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/android-chrome-512x512.png",
+                    "caption": "Android Chrome 512x512 Icon"
+                    },
+                    {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/android-chrome-192x192.png",
+                    "caption": "Android Chrome 192x192 Icon"
+                    }
+                ],
+                "slogan": "Partner Win Technology Provider",
+                "foundingDate": "2025-07-13",
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+8801617440880",
+                    "contactType": "Customer service",
+                    "email": "cyberbitbyte@gmail.com"
+                },
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Mirpur",
+                    "addressLocality": "Dhaka",
+                    "addressRegion": "Dhaka",
+                    "postalCode": "1216",
+                    "addressCountry": "Bangladesh"
+                },
+                "sameAs": [
+                    "https://www.facebook.com/cyberbitbyte",
+                    "https://www.youtube.com/@cyberbitbyte"
+                ]
+                },
+                {
+                "@type": "WebSite",
+                "@id": "https://www.cyberbitbyte.com/#website",
+                "url": "https://www.cyberbitbyte.com",
+                "name": "Cyber Bit Byte",
+                "alternateName": "CyberbitByte",
+                "description": "CyberbitByte provides expert software development, IT solutions, and digital marketing services to help businesses grow, innovate, and thrive in the digital age.",
+                "inLanguage": "en",
+                "publisher": {
+                    "@id": "https://www.cyberbitbyte.com/#organization"
+                },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://www.cyberbitbyte.com/search?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+                },
+                {
+                "@type": "WebPage",
+                "@id": "https://www.cyberbitbyte.com/#webpage",
+                "url": "https://www.cyberbitbyte.com",
+                "name": "CyberbitByte | Your Partner for Software Development & IT Solution",
+                "description": "CyberbitByte provides expert software development, IT solutions, and digital marketing services to help businesses grow, innovate, and thrive in the digital age. Your one-stop partner for technology and online success.",
+                "keywords": "CyberbitByte, software development, IT solutions, IT services, digital marketing, SEO services, web development, mobile app development, cloud solutions, IT consulting, digital transformation, custom software, social media marketing, PPC advertising, enterprise software, tech support, UI/UX design, e-commerce development, cybersecurity solutions",
+                "inLanguage": "en",
+                "author": {
+                    "@type": "Organization",
+                    "name": "@cyberbitbyte"
+                },
+                "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": "https://www.cyberbitbyte.com/images/cyber-bit-byte-services.webp",
+                    "caption": "Cyber Bit Byte Services Overview"
+                },
+                "headline": "Your Trusted Partner for Software Development, IT Support & Digital Success"
+                },
+                {
+                "@type": "ImageObject",
+                "@id": "https://www.cyberbitbyte.com/images/cyber-bit-byte-services.webp",
+                "url": "https://www.cyberbitbyte.com/images/cyber-bit-byte-services.webp",
+                "contentUrl": "https://www.cyberbitbyte.com/images/cyber-bit-byte-services.webp",
+                "caption": "Cyber Bit Byte Services Overview",
+                "description": "Visual representation of Cyber Bit Byte's services.",
+                "license": "https://www.cyberbitbyte.com"
+                }
+            ]
+        }
+        </script>
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@graph": [
+                
+                {
+                "@type": "BreadcrumbList",
+                "@id": "https://www.cyberbitbyte.com/#breadcrumb",
+                "itemListElement": [
+                    {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.cyberbitbyte.com"
+                    },
+                    {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Services",
+                    "item": "https://www.cyberbitbyte.com/services"
+                    },
+                    {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Works",
+                    "item": "https://www.cyberbitbyte.com/works"
+                    },
+                    {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": "Technologies",
+                    "item": "https://www.cyberbitbyte.com/technologies"
+                    }
+                ]
+                },
+                {
+                "@type": "FAQPage",
+                "@id": "https://www.cyberbitbyte.com/#faq",
+                "mainEntity": [
+                    {
+                    "@type": "Question",
+                    "name": "What services does Cyber Bit Byte offer?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Cyber Bit Byte offers comprehensive software development, IT solutions, and digital marketing services including website development, technical SEO, mobile app development, and more."
+                    }
+                    },
+                    {
+                    "@type": "Question",
+                    "name": "Where is Cyber Bit Byte located?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "We are based in Dhaka, Bangladesh, serving clients globally with our technology solutions and digital services."
+                    }
+                    },
+                    {
+                    "@type": "Question",
+                    "name": "How can I contact Cyber Bit Byte?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "You can reach us by phone at +8801617440880, email at cyberbitbyte@gmail.com, or through our social media channels on Facebook and YouTube."
+                    }
+                    },
+                    {
+                    "@type": "Question",
+                    "name": "What industries do you serve?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "We serve businesses across various industries including e-commerce, healthcare, education, finance, and more, providing tailored technology solutions for each sector."
+                    }
+                    },
+                    {
+                    "@type": "Question",
+                    "name": "Do you provide ongoing support after project completion?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, we offer comprehensive post-launch support and maintenance services to ensure your digital solutions continue to perform optimally."
+                    }
+                    }
+                ]
+                },
+                {
+                "@type": "ItemList",
+                "@id": "https://www.cyberbitbyte.com/services/#service-list",
+                "name": "Cyber Bit Byte Services",
+                "description": "Comprehensive list of professional services offered by Cyber Bit Byte",
+                "numberOfItems": 3,
+                "itemListElement": [
+                    {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@type": "Service",
+                        "name": "Website Development",
+                        "description": "Custom website development services including responsive design, e-commerce solutions, and content management systems.",
+                        "provider": {
+                        "@id": "https://www.cyberbitbyte.com/#organization"
+                        },
+                        "areaServed": "Worldwide",
+                        "url": "https://www.cyberbitbyte.com/services#website-development"
+                    }
+                    },
+                    {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@type": "Service",
+                        "name": "Technical SEO",
+                        "description": "Comprehensive technical SEO services to improve website performance, crawlability, and search engine rankings.",
+                        "provider": {
+                        "@id": "https://www.cyberbitbyte.com/#organization"
+                        },
+                        "areaServed": "Worldwide",
+                        "url": "https://www.cyberbitbyte.com/services#technical-seo"
+                    }
+                    },
+                    {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@type": "Service",
+                        "name": "Mobile Apps",
+                        "description": "Development of native and cross-platform mobile applications for iOS and Android devices.",
+                        "provider": {
+                        "@id": "https://www.cyberbitbyte.com/#organization"
+                        },
+                        "areaServed": "Worldwide",
+                        "url": "https://www.cyberbitbyte.com/services#mobile-apps"
+                    }
+                    }
+                ]
+                }
+            ]
+            }
+        </script>
+
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Cyber Bit Byte",
+            "url": "https://www.cyberbitbyte.com",
+            "logo": "https://www.cyberbitbyte.com/images/logo.png",
+            "sameAs": [],
+            "hasPart": [
+                {
+                "@type": "Organization",
+                "name": "The Foreign Investors’ Chamber of Commerce & Industry (FICCI)",
+                "url": "https://www.ficci.org.bd/",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/cbb-clients-ficci-bangladesh-1.webp"
+                },
+                {
+                "@type": "Organization",
+                "name": "Sunglasswala E-commerce Retail & Wholesale",
+                "url": "https://sunglasswala.com.bd/",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/sunglasswala.webp"
+                },
+                {
+                "@type": "Organization",
+                "name": "BinaryLogic Leading Computer Retail & Wholesale",
+                "url": "https://www.binarylogic.com.bd/",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/binary-logic.webp"
+                },
+                {
+                "@type": "Organization",
+                "name": "eCourier Bangladesh – Fast & Reliable Courier Services",
+                "url": "",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/e-courier-banglaesh.webp.pagespeed.ce.aoLhSDnmnK.webp"
+                },
+                {
+                "@type": "Organization",
+                "name": "BCS Computer City Leading Computer Market",
+                "url": "https://www.bcscomputercity.com/",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/bcs-computer-city-computer-market.webp.pagespeed.ce.vYO1SGQUSo.webp"
+                },
+                {
+                "@type": "Organization",
+                "name": "Somoy Media Limited, Live Broadcasts & Media Coverage",
+                "url": "https://www.somoynews.tv",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/somoy-news-tv-channel-logo.webp.pagespeed.ce.fKLeTmcL_p.webp"
+                },
+                {
+                "@type": "Organization",
+                "name": "Johny Style World – Trusted Textile & Fabric",
+                "url": "https://www.johnystyleworld.com/",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/xlogo-tranfarent.gif.pagespeed.ic.2L0X6DCk5A.webp"
+                },
+                {
+                "@type": "Organization",
+                "name": "Wave Engineering – Leading Automation Products Supplier",
+                "url": "https://waveengineeringbd.com/",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/xwave-engineering-lenze-products.png.pagespeed.ic.kqFRuFF_Xg.webp"
+                },
+                {
+                "@type": "Organization",
+                "name": "Dainik Cox’s Bazar – Trusted Local News Agency",
+                "url": "https://dainikcoxsbazar.com/",
+                "logo": "https://www.cyberbitbyte.com/images/uploads/thumb/xdainik-coxsbazar-newspaper-newsportal.png.pagespeed.ic.1iFJ2B7zfr.webp"
+                }
+            ]
+            }
+            </script>
+
+        
+                            <!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MZMR2ZFZ');</script> <!-- End Google Tag Manager -->
+                            <script></script>
+                            <meta name="google-site-verification" content="PvgfJuavof7uCPpsOZWBUuE-yjqMQ-kMUBcRxJn4GVU"/>
+</head>
+
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen flex flex-col">
+ <!-- Google Tag Manager (noscript) --> <noscript>   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZMR2ZFZ" height="0" width="0" style="display:none;visibility:hidden"></iframe> </noscript> <!-- End Google Tag Manager (noscript) -->
+                
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5 shadow-lg">
+        <h1 class="text-2xl font-bold text-center">🚀 Agile oKanban Board</h1>
+        <p class="text-center text-sm opacity-90">Modern • Agile • Persistent</p>
+    </header>
+
+    <!-- Add Task Form -->
+    <section class="p-4 bg-white shadow flex flex-col sm:flex-row gap-3 items-center">
+        <input id="taskTitle" type="text" placeholder="✍️ Task title"
+            class="w-full block sm-w-half md:flex-1 p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+
+        <input id="projectName" type="text" placeholder="🏷️ Project name"
+            class="w-full block sm-w-half md:flex-1 p-3 border rounded-xl">
+
+        <input id="taskStatus" type="text" placeholder="📌 Status (todo, review, done...)"
+            class="w-full block sm-w-half md:flex-1 p-3 border rounded-xl w-48">
+
+        <button id="addTaskBtn"
+            class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 hover:scale-105 transition">
+            ➕ Add Task
+        </button>
+    </section>
+
+    <!-- Kanban Board -->
+    <main id="board" class="flex flex-col sm:flex-row gap-4 p-4 flex-1 overflow-x-auto"></main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm p-3 text-gray-500">
+        Developed by <strong><a href="https://cyberbitbyte.com" target="_blank">CyberBitByte</a></strong> © 2026
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const taskTitle = document.getElementById("taskTitle");
+        const projectName = document.getElementById("projectName");
+        const taskStatus = document.getElementById("taskStatus");
+        const addTaskBtn = document.getElementById("addTaskBtn");
+        const board = document.getElementById("board");
+
+        let tasks = JSON.parse(localStorage.getItem("kanbanTasks")) || [];
+
+        function save() {
+            localStorage.setItem("kanbanTasks", JSON.stringify(tasks));
+        }
+
+        function uid() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function normalizeStatus(status) {
+            return status.toLowerCase().replace(/\s+/g, "");
+        }
+
+        function createColumn(status) {
+            if (document.getElementById(status)) return;
+
+            const column = document.createElement("div");
+            column.className = "flex-1 bg-white rounded-2xl shadow-lg p-3 flex flex-col min-w-[250px]";
+
+            column.innerHTML = `
+                <h3 class="font-bold text-center mb-3 capitalize">${status}</h3>
+                <div id="${status}" class="flex-1 flex flex-col gap-2"
+                     ondragover="event.preventDefault()"
+                     ondrop="dropTask(event, '${status}')"></div>
+            `;
+
+            board.appendChild(column);
+        }
+
+        function render() {
+            board.innerHTML = "";
+            const statuses = [...new Set(tasks.map(t => t.status))];
+            statuses.forEach(createColumn);
+
+            tasks.forEach(task => {
+                const col = document.getElementById(task.status);
+                const card = document.createElement("div");
+                card.className = "task relative bg-gray-50 p-3 rounded-xl shadow cursor-move hover:scale-105 transition";
+                card.draggable = true;
+                card.ondragstart = e => e.dataTransfer.setData("id", task.id);
+
+                card.innerHTML = `
+                    <div class="font-semibold">${task.title}</div>
+                    <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
+                        ${task.project || "General"}
+                    </span>
+
+                    <div class="absolute top-2 right-2 flex justify-between mt-2 text-sm">
+                        <button onclick="editTask('${task.id}')" class="text-indigo-600">✏️</button>
+                        <button onclick="deleteTask('${task.id}')" class="text-red-500">🗑️</button>
+                    </div>
+                `;
+
+                col.appendChild(card);
+            });
+        }
+
+        addTaskBtn.onclick = () => {
+            if (!taskTitle.value || !taskStatus.value) return;
+
+            tasks.push({
+                id: uid(),
+                title: taskTitle.value,
+                project: projectName.value,
+                status: normalizeStatus(taskStatus.value)
+            });
+
+            save();
+            render();
+
+            taskTitle.value = "";
+            projectName.value = "";
+            taskStatus.value = "";
+        };
+
+        function editTask(id) {
+            const t = tasks.find(x => x.id === id);
+            if (!t) return;
+
+            const title = prompt("Edit title", t.title);
+            const project = prompt("Edit project", t.project);
+            const status = prompt("Edit status", t.status);
+
+            if (title !== null) t.title = title;
+            if (project !== null) t.project = project;
+            if (status !== null) t.status = normalizeStatus(status);
+
+            save();
+            render();
+        }
+
+        function deleteTask(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            save();
+            render();
+        }
+
+        function dropTask(e, status) {
+            const id = e.dataTransfer.getData("id");
+            const t = tasks.find(x => x.id === id);
+            if (t) {
+                t.status = status;
+                save();
+                render();
+            }
+        }
+
+        render();
+    </script>
+</body>
+</html>
