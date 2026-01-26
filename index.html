@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- SEO -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agile Kanban Task Management Board | oKanban</title>
-    <meta name="description" content="oKanban is a modern Agile Kanban task management board with CRUD, drag and drop, dynamic statuses and localStorage persistence." />
-    <meta name="keywords" content="Kanban, Agile, Task Management, Scrum Board, Project Management Tool" />
-    <meta name="author" content="CyberBitByte" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>oKanban | Agile Kanban Task Management Board</title>
+    <meta name="title" content="oKanban | Agile Kanban Task Management Board">
+    <meta name="description" content="oKanban is a modern Agile Kanban task management tool built with HTML5, CSS3, and JavaScript. Organize, track, and manage your projects or tasks efficiently.">
+    <meta name="keywords" content="oKanban, Kanban Board, Agile Task Management, Task Organizer, Project Management Tool, HTML5, CSS3, JavaScript">
+    <meta name="author" content="@cyberbitbyte">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    <meta name="copyright" content="Cyber Bit Byte">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+
+    <!-- Canonical & Sitemap -->
+    <link rel="canonical" href="https://software.cyberbitbyte.com/okanban">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://software.cyberbitbyte.com/sitemap.xml">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/x-icon" href="https://software.cyberbitbyte.com/okanban/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://software.cyberbitbyte.com/okanban/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://software.cyberbitbyte.com/okanban/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="https://software.cyberbitbyte.com/okanban/apple-touch-icon.png">
+    <link rel="manifest" href="/okanban/site.webmanifest">
+    <meta name="theme-color" content="#00bcd4">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://software.cyberbitbyte.com/okanban">
+    <meta property="og:title" content="oKanban | Agile Kanban Task Management Board">
+    <meta property="og:description" content="oKanban is a modern Agile Kanban task management tool built with HTML5, CSS3, and JavaScript. Organize, track, and manage your projects or tasks efficiently.">
+    <meta property="og:image" content="https://software.cyberbitbyte.com/okanban/okanban-task-management-tool.png">
+    <meta property="og:site_name" content="Cyber Bit Byte">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@cyberbitbyte">
+    <meta name="twitter:title" content="oKanban | Agile Kanban Task Management Board">
+    <meta name="twitter:description" content="oKanban is a modern Agile Kanban task management tool built with HTML5, CSS3, and JavaScript. Organize, track, and manage your projects or tasks efficiently.">
+    <meta name="twitter:image" content="https://software.cyberbitbyte.com/okanban/okanban-task-management-tool.png">
+    <meta name="twitter:url" content="https://software.cyberbitbyte.com/okanban">
+
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -507,13 +543,13 @@
 
     <!-- Add Task Form -->
     <section class="p-4 bg-white shadow flex flex-col sm:flex-row gap-3 items-center">
-        <input id="taskTitle" type="text" placeholder="✍️ Task title"
+        <input id="taskTitle" type="text" placeholder="Task title"
             class="w-full block sm-w-half md:flex-1 p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
 
-        <input id="projectName" type="text" placeholder="🏷️ Project name"
+        <input id="projectName" type="text" placeholder="Project name"
             class="w-full block sm-w-half md:flex-1 p-3 border rounded-xl">
 
-        <input id="taskStatus" type="text" placeholder="📌 Status (todo, review, done...)"
+        <input id="taskStatus" type="text" placeholder="Status (todo, review, done...)"
             class="w-full block sm-w-half md:flex-1 p-3 border rounded-xl w-48">
 
         <button id="addTaskBtn"
@@ -582,13 +618,14 @@
 
                 card.innerHTML = `
                     <div class="font-semibold">${task.title}</div>
-                    <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
+                    
+
+                    <div class="flex justify-between mt-2 text-sm">
+                        <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
                         ${task.project || "General"}
                     </span>
-
-                    <div class="absolute top-2 right-2 flex justify-between mt-2 text-sm">
-                        <button onclick="editTask('${task.id}')" class="text-indigo-600">✏️</button>
-                        <button onclick="deleteTask('${task.id}')" class="text-red-500">🗑️</button>
+                        <button onclick="editTask('${task.id}')" class="text-indigo-600">Edit</button>
+                        <button onclick="deleteTask('${task.id}')" class="text-red-500">Delete</button>
                     </div>
                 `;
 
@@ -651,7 +688,7 @@
         function updateGMTTime() {
             const now = new Date();
             const gmtString = now.toUTCString(); // GMT format
-            document.getElementById("gmtTime").textContent = `🌐 Current GMT Time: ${gmtString}`;
+            document.getElementById("gmtTime").textContent = `Current GMT Time: ${gmtString}`;
         }
 
         // Initial call
